@@ -141,5 +141,6 @@ vite.config.ts.timestamp-*
 /.vscode
 /.agent
 /.agents
+/.cursor
 SKILL.md
 skills-lock.json

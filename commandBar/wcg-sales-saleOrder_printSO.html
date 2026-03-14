@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>In Đơn Bán</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Lexend:wght@600;700&family=Roboto:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/WebResources/htn1423_wcgsharedbrand" />
+        <style>
+            /* ── Print document container ── */
+            .document {
+                max-width: 900px;
+                margin: 20px auto;
+                background: #fff;
+                padding: 28px 32px;
+                border: 1px solid #e9ecef;
+            }
+
+            /* ── Header: logo + company info ── */
+            .doc-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                margin-bottom: 20px;
+            }
+
+            .logo-block {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .logo-block img {
+                width: 72px;
+                height: auto;
+            }
+
+            .logo-block .brand-name {
+                font-family: "Lexend", sans-serif;
+                font-size: 22px;
+                font-weight: 700;
+                color: #3492ab;
+                letter-spacing: 1px;
+            }
+
+            .company-info {
+                text-align: right;
+                line-height: 1.65;
+                font-size: 12px;
+            }
+
+            .company-info .company-name {
+                font-family: "Lexend", sans-serif;
+                font-weight: 700;
+                font-size: 13px;
+            }
+
+            /* ── Order reference bar ── */
+            .order-bar {
+                background: #3492ab;
+                color: #fff;
+                font-family: "Lexend", sans-serif;
+                font-weight: 600;
+                font-size: 13px;
+                text-align: center;
+                padding: 9px 16px;
+                margin-bottom: 16px;
+                border-radius: 2px;
+            }
+
+            /* ── Customer info section ── */
+            .customer-section {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 16px;
+                line-height: 1.7;
+            }
+
+            .customer-section .label {
+                color: #6c757d;
+            }
+            .customer-section .value {
+                font-weight: 500;
+            }
+
+            /* ── Print overrides ── */
+            @media print {
+                @page {
+                    margin: 0;
+                }
+                .document {
+                    border: none;
+                    margin: 0;
+                    padding: 20px;
+                    max-width: 100%;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="toolbar no-print">
+            <button class="btn btn-primary" onclick="printDocument()">&#128438; In phiếu</button>
+            <button class="btn btn-secondary" onclick="closeDialog()">&#10005; Đóng</button>
+        </div>
+
+        <div class="document" id="doc-content">
+            <div class="state-msg" id="loading-msg">
+                <div class="spinner"></div>
+                Đang tải dữ liệu đơn hàng...
+            </div>
+        </div>
+
+        <script src="/WebResources/htn1423_wcgsalessaleOrder_printSO_script"></script>
+    </body>
+</html>

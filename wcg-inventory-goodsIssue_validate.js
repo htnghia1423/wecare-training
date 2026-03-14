@@ -7,16 +7,9 @@ var CheckTonKho = CheckTonKho || {};
 CheckTonKho.onSoluongChange = async function (executionContext) {
     var formContext = executionContext.getFormContext();
 
-    // Khai báo schema name
-    var soLuongSchema = "htn1423_soluong";
-    var sanPhamLookupSchema = "htn1423_tensanpham";
-    var tonKhoEntityName = "htn1423_nghiatonkho";
-    var tonKhoFieldSchema = "htn1423_tonthucte";
-    var tonKhoSanPhamLookupSchema = "htn1423_tensanpham";
-
-    var soLuongAttr = formContext.getAttribute(soLuongSchema);
-    var soLuongControl = formContext.getControl(soLuongSchema);
-    var sanPhamAttr = formContext.getAttribute(sanPhamLookupSchema);
+    var soLuongAttr = formContext.getAttribute("htn1423_soluong");
+    var soLuongControl = formContext.getControl("htn1423_soluong");
+    var donBanChiTietAttr = formContext.getAttribute("htn1423_onbanchitiet");
 
     // Xóa thông báo cũ
     soLuongControl.clearNotification("TonKhoError");
@@ -24,33 +17,54 @@ CheckTonKho.onSoluongChange = async function (executionContext) {
     formContext.ui.clearFormNotification("TonKhoNotFound");
 
     var soLuong = soLuongAttr.getValue();
-    var sanPham = sanPhamAttr ? sanPhamAttr.getValue() : null;
+    var donBanChiTiet = donBanChiTietAttr ? donBanChiTietAttr.getValue() : null;
 
-    if (soLuong == null || soLuong <= 0 || sanPham == null) {
+    if (soLuong == null || soLuong <= 0 || donBanChiTiet == null) {
         return;
     }
 
-    var sanPhamId = sanPham[0].id.replace(/[{}]/g, "");
-    var fetchFilter = "?$filter=_" + tonKhoSanPhamLookupSchema + "_value eq '" + sanPhamId + "'";
-    var fetchSelect = "&$select=" + tonKhoFieldSchema;
+    var donBanChiTietId = donBanChiTiet[0].id.replace(/[{}]/g, "");
 
+    // Bước 1: Lấy Tên sản phẩm từ bản ghi Đơn bán chi tiết
+    var donBanChiTietRecord;
+    try {
+        donBanChiTietRecord = await Xrm.WebApi.retrieveRecord(
+            "htn1423_onbanchitiet",
+            donBanChiTietId,
+            "?$select=_htn1423_tensanpham_value"
+        );
+    } catch (error) {
+        Xrm.Navigation.openAlertDialog({
+            title: "Lỗi kiểm tra tồn kho",
+            text: "Không thể lấy thông tin Đơn bán chi tiết: " + error.message
+        });
+        return;
+    }
+
+    var sanPhamId = donBanChiTietRecord["_htn1423_tensanpham_value"];
+    if (!sanPhamId) {
+        formContext.ui.setFormNotification(
+            "Cảnh báo: Đơn bán chi tiết chưa có Tên sản phẩm.",
+            "INFO",
+            "TonKhoNotFound"
+        );
+        return;
+    }
+
+    // Bước 2: Query Tồn kho theo sản phẩm, chỉ lấy bản ghi Active (statecode eq 0)
     try {
         var result = await Xrm.WebApi.retrieveMultipleRecords(
-            tonKhoEntityName,
-            fetchFilter + fetchSelect
+            "htn1423_nghiatonkho",
+            "?$select=htn1423_tonthucte&$filter=_htn1423_tensanpham_value eq '" + sanPhamId + "' and statecode eq 0"
         );
 
         if (result.entities.length > 0) {
-            var tonThucTe = result.entities[0][tonKhoFieldSchema] || 0;
+            var tonThucTe = result.entities[0]["htn1423_tonthucte"] || 0;
 
             if (soLuong > tonThucTe) {
                 soLuongAttr.setValue(null);
                 soLuongControl.setNotification(
-                    "SL nhập (" +
-                        soLuong +
-                        ") > Tồn thực tế (" +
-                        tonThucTe +
-                        "). Vui lòng điều chỉnh.",
+                    "SL nhập (" + soLuong + ") > Tồn thực tế (" + tonThucTe + "). Vui lòng điều chỉnh.",
                     "TonKhoError"
                 );
                 formContext.ui.setFormNotification(
@@ -61,7 +75,7 @@ CheckTonKho.onSoluongChange = async function (executionContext) {
             }
         } else {
             formContext.ui.setFormNotification(
-                "Cảnh báo: Sản phẩm này chưa có dữ liệu tồn kho.",
+                "Cảnh báo: Sản phẩm này chưa có dữ liệu tồn kho (hoặc đã Inactive).",
                 "INFO",
                 "TonKhoNotFound"
             );

@@ -1,0 +1,226 @@
+/* =============================================================
+   Wecare Brand — Shared Stylesheet
+   Upload to Dataverse as: htn1423_wcg-shared-brand (CSS type)
+   Reference in HTML: <link rel="stylesheet" href="/WebResources/htn1423_wcg-shared-brand.css">
+   ============================================================= */
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ── Base typography ── */
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #343A40;
+    background: #F8F9FA;
+    font-size: 13px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Lexend', sans-serif;
+    color: #343A40;
+}
+
+/* ── Buttons ── */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    transition: opacity 0.15s;
+    border: none;
+}
+
+.btn:hover {
+    opacity: 0.85;
+}
+
+.btn-primary {
+    background: #3492ab;
+    color: #fff;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #3492ab;
+    border: 1px solid #3492ab;
+}
+
+.btn-positive {
+    background: #4CAF50;
+    color: #fff;
+}
+
+/* ── Toolbar (sticky action bar) ── */
+.toolbar {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 10px 20px;
+    background: #fff;
+    border-bottom: 1px solid #E9ECEF;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* ── Panel / Card ── */
+.panel {
+    border: 1px solid #E9ECEF;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.panel-header {
+    background: #3492ab;
+    color: #fff;
+    padding: 12px 16px;
+    font-family: 'Lexend', sans-serif;
+    font-weight: 600;
+}
+
+.panel-body {
+    background: #F8F9FA;
+    padding: 16px;
+    color: #343A40;
+}
+
+/* ── Data table ── */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead tr {
+    background: #3492ab;
+    color: #fff;
+    font-family: 'Lexend', sans-serif;
+    font-size: 12px;
+}
+
+thead th {
+    padding: 8px 10px;
+    text-align: center;
+    border: 1px solid #236E84;
+    font-weight: 600;
+}
+
+tbody tr:nth-child(even) {
+    background: #F8F9FA;
+}
+
+tbody td {
+    padding: 7px 10px;
+    border: 1px solid #E9ECEF;
+    vertical-align: middle;
+}
+
+td.center {
+    text-align: center;
+}
+
+td.right {
+    text-align: right;
+}
+
+/* ── Totals rows ── */
+.total-label {
+    font-family: 'Lexend', sans-serif;
+    font-weight: 600;
+    background: #C5E0E8;
+    text-align: right;
+    padding: 7px 10px;
+    border: 1px solid #E9ECEF;
+}
+
+.total-value {
+    text-align: right;
+    font-weight: 500;
+    padding: 7px 10px;
+    border: 1px solid #E9ECEF;
+}
+
+.total-final {
+    background: #3492ab;
+    color: #fff;
+    font-family: 'Lexend', sans-serif;
+    font-weight: 700;
+    padding: 8px 10px;
+    border: 1px solid #236E84;
+}
+
+/* ── Loading spinner ── */
+.spinner {
+    width: 36px;
+    height: 36px;
+    border: 4px solid #E9ECEF;
+    border-top-color: #3492ab;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 12px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ── Loading / Error states ── */
+.state-msg {
+    text-align: center;
+    padding: 48px 20px;
+    color: #6C757D;
+    font-size: 14px;
+}
+
+.state-msg.error {
+    color: #dc3545;
+}
+
+/* ── Utilities ── */
+.text-muted {
+    color: #6C757D;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid #E9ECEF;
+    margin: 12px 0;
+}
+
+/* ── Print media ── */
+@media print {
+    @page {
+        margin: 0;
+    }
+
+    .toolbar {
+        display: none;
+    }
+
+    body {
+        background: #fff;
+        padding: 10mm;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}

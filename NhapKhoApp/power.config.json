@@ -1,0 +1,48 @@
+{
+  "version": "1.0",
+  "appId": "268aec1e-b7ac-41fb-bebe-e52fd2bca039",
+  "appDisplayName": "Nhap Kho App",
+  "region": "prod",
+  "environmentId": "8ca292ee-b6c5-ed9e-8c8e-296a0d156c82",
+  "description": "",
+  "buildPath": "./dist",
+  "buildEntryPoint": "index.html",
+  "localAppUrl": "http://localhost:3000",
+  "logoPath": "Default",
+  "connectionReferences": {},
+  "databaseReferences": {
+    "default.cds": {
+      "dataSources": {
+        "_nghia_nh_pkhos": {
+          "entitySetName": "htn1423_nhapkhos",
+          "logicalName": "htn1423_nhapkho"
+        },
+        "_nghia___nmuachiti_ts": {
+          "entitySetName": "htn1423_onmuachitiets",
+          "logicalName": "htn1423_onmuachitiet"
+        },
+        "_nghia___nmuas": {
+          "entitySetName": "htn1423_onmuas",
+          "logicalName": "htn1423_onmua"
+        },
+        "_nghia_nh_cungc_ps": {
+          "entitySetName": "htn1423_nhacungcaps",
+          "logicalName": "htn1423_nhacungcap"
+        },
+        "_nghia_nh_mnh_cungc_ps": {
+          "entitySetName": "htn1423_nhomnhacungcaps",
+          "logicalName": "htn1423_nhomnhacungcap"
+        },
+        "_nghia_nh_ms_nph_ms": {
+          "entitySetName": "htn1423_nhomsanphams",
+          "logicalName": "htn1423_nhomsanpham"
+        },
+        "_nghia_s_nph_ms": {
+          "entitySetName": "htn1423_nghiasanphams",
+          "logicalName": "htn1423_nghiasanpham"
+        }
+      },
+      "environmentVariableName": ""
+    }
+  }
+}

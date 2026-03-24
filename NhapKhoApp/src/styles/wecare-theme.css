@@ -1,0 +1,107 @@
+/* Typography - system font stack (no external CDN) */
+
+/* CSS Variables - WeCare Colors */
+:root {
+  /* Primary Colors */
+  --wecare-blue: #3492ab;
+  --wecare-green: #4CAF50;
+
+  /* Neutral Colors */
+  --bg-off-white: #F8F9FA;
+  --border-light-grey: #E9ECEF;
+  --text-medium-grey: #6C757D;
+  --text-charcoal: #343A40;
+
+  /* Tints */
+  --blue-tint-1: #7FBACB;
+  --blue-tint-2: #C5E0E8;
+
+  /* Shades */
+  --blue-shade-1: #236E84;
+  --blue-shade-2: #164553;
+
+  /* Typography */
+  --font-heading: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-body: 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 24px;
+  --spacing-2xl: 32px;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Global Resets */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-charcoal);
+  background: var(--bg-off-white);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  color: var(--text-charcoal);
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: var(--spacing-lg);
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: var(--spacing-md);
+}
+
+h3 {
+  font-size: 16px;
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Utility Classes */
+.text-muted {
+  color: var(--text-medium-grey);
+}
+
+.text-primary {
+  color: var(--wecare-blue);
+}
+
+.text-success {
+  color: var(--wecare-green);
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border-light-grey);
+  margin: var(--spacing-md) 0;
+}

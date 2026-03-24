@@ -1,0 +1,16 @@
+/* container aliases */
+.wecare-container {
+  padding: var(--spacing-xl);
+  background: var(--bg-off-white);
+  min-height: 100vh;
+}
+.wecare-title {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  color: var(--wecare-blue);
+  margin-bottom: var(--spacing-xs);
+}
+.wecare-subtitle {
+  font-size: 14px;
+  color: var(--text-medium-grey);
+}

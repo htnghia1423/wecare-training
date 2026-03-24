@@ -1,0 +1,62 @@
+/* aliases for filters and inputs used in components */
+.wecare-filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.wecare-filters__search {
+  flex: 1;
+  min-width: 300px;
+}
+
+.wecare-filters__controls {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
+.wecare-input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.wecare-input-group__icon {
+  position: absolute;
+  left: 10px;
+  color: var(--text-medium-grey);
+  display: flex;
+}
+
+.wecare-input, .wecare-select {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--border-light-grey);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text-charcoal);
+  background: #fff;
+  transition: border-color 0.15s ease;
+}
+
+.wecare-input--search {
+  padding-left: 32px;
+}
+
+.wecare-input:focus, .wecare-select:focus {
+  outline: none;
+  border-color: var(--wecare-blue);
+  box-shadow: 0 0 0 3px var(--blue-tint-2);
+}
+
+.wecare-header {
+  margin-bottom: 2rem;
+}
+.wecare-header h1 { margin-bottom: 0.5rem; }
+.wecare-header p { color: var(--text-medium-grey); }
+

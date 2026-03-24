@@ -1,0 +1,68 @@
+/* pagination aliases */
+.wecare-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-lg) 0;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.wecare-pagination__info {
+  color: var(--text-medium-grey);
+  font-size: 14px;
+}
+
+.wecare-pagination__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.wecare-pagination__label {
+  font-size: 14px;
+  color: var(--text-charcoal);
+  margin-right: var(--spacing-sm);
+}
+
+.wecare-pagination__select {
+  padding: 4px 8px;
+  border: 1px solid var(--border-light-grey);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  font-size: 14px;
+}
+
+.wecare-pagination__buttons {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.wecare-pagination__page {
+  font-size: 14px;
+  color: var(--text-charcoal);
+  font-weight: 500;
+}
+
+/* ghost button fix */
+.wecare-button--ghost {
+  background: transparent;
+  color: var(--text-medium-grey);
+  border: 1px solid var(--border-light-grey);
+}
+.wecare-button--ghost:hover {
+  background: var(--bg-off-white);
+  color: var(--wecare-blue);
+}
+
+/* danger ghost button for delete */
+.wecare-button--danger-ghost {
+  background: transparent;
+  color: #dc3545;
+  border: 1px solid currentColor;
+}
+.wecare-button--danger-ghost:hover {
+  background: #dc3545;
+  color: #fff;
+}

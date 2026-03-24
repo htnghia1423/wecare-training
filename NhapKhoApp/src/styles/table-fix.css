@@ -1,0 +1,81 @@
+.wecare-table-container {
+  overflow-x: auto;
+  border: 1px solid var(--border-light-grey);
+  border-radius: var(--radius-md);
+  background: #fff;
+  margin-top: 1rem;
+}
+
+.wecare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.wecare-table thead {
+  background: var(--bg-off-white);
+  border-bottom: 2px solid var(--border-light-grey);
+}
+
+.wecare-table__header {
+  padding: var(--spacing-md);
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-charcoal);
+  font-family: var(--font-heading);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.wecare-table__header--sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.wecare-table__header--sortable:hover {
+  background: var(--blue-tint-2);
+}
+
+.wecare-table__header-content {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.wecare-table__cell {
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--border-light-grey);
+}
+
+.wecare-table__row:hover {
+  background: var(--bg-off-white);
+}
+
+.wecare-table__row:last-child .wecare-table__cell {
+  border-bottom: none;
+}
+
+/* Badges */
+.wecare-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.wecare-badge--success {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.wecare-badge--inactive {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.wecare-table__cell--actions {
+  display: flex;
+  gap: 8px;
+}

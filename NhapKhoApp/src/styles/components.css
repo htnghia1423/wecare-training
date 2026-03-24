@@ -647,6 +647,11 @@
 }
 
 .wecare-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
   margin-bottom: 2rem;
 }
 
@@ -654,7 +659,12 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 0.25rem;
+}
+
+.wecare-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
 }
 
 .wecare-header__logo {

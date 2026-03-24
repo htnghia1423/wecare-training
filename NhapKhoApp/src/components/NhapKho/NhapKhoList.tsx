@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import * as XLSX from "xlsx";
 import { useNhapKho } from "../../hooks/useNhapKho";
 import { NhapKhoFilters } from "./NhapKhoFilters";
 import { NhapKhoTable } from "./NhapKhoTable";
@@ -15,7 +16,7 @@ import { EmptyState } from "../common/EmptyState";
 import { ToastContainer } from "../common/ToastContainer";
 import { useToast } from "../../hooks/useToast";
 import type { FormMode, NhapKhoTableRow, NhapKhoFormData, SortField } from "./types";
-import { IoAdd, IoSearch, IoFolderOpen } from "react-icons/io5";
+import { IoAdd, IoSearch, IoFolderOpen, IoRefresh, IoDownload } from "react-icons/io5";
 import { Button } from "../common/Button";
 
 export const NhapKhoList: React.FC = () => {
@@ -84,6 +85,36 @@ export const NhapKhoList: React.FC = () => {
     const handleViewSanPham = (record: NhapKhoTableRow) => {
         setSanPhamOnmuachitietId(record._htn1423_onmuachitiet_value);
         setIsSanPhamDetailOpen(true);
+    };
+
+    const handleExportExcel = () => {
+        const now = new Date();
+        const pad = (n: number) => String(n).padStart(2, "0");
+        const datetime = `${now.getFullYear()}${pad(now.getMonth() + 1)}${pad(now.getDate())}_${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`;
+
+        const data = records.map((r) => {
+            const rAnnotated = r as NhapKhoTableRow & {
+                "_htn1423_onmuachitiet_value@OData.Community.Display.V1.FormattedValue"?: string;
+            };
+            return {
+                "Mã nhập kho": r.htn1423_name ?? "",
+                "Số lượng": r.htn1423_soluong ?? "",
+                "Đơn mua chi tiết":
+                    r.htn1423_onmuachitietname ||
+                    rAnnotated[
+                        "_htn1423_onmuachitiet_value@OData.Community.Display.V1.FormattedValue"
+                    ] ||
+                    "",
+                "Tên sản phẩm": r.htn1423_tensanpham ?? "",
+                "Ngày tạo": r.createdon ?? "",
+                "Trạng thái": r.statecode === 0 ? "Hoạt động" : "Không hoạt động"
+            };
+        });
+
+        const ws = XLSX.utils.json_to_sheet(data);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Nhập Kho");
+        XLSX.writeFile(wb, `Nhập Kho_${datetime}.xlsx`);
     };
 
     const handleEdit = (record: NhapKhoTableRow) => {
@@ -195,6 +226,26 @@ export const NhapKhoList: React.FC = () => {
                         <h1 className="wecare-title">Quản lý Nhập kho</h1>
                         <p className="wecare-subtitle">Theo dõi và quản lý hàng hóa nhập kho</p>
                     </div>
+                </div>
+                <div className="wecare-header__actions">
+                    <Button
+                        variant="ghost"
+                        size="medium"
+                        icon={<IoRefresh />}
+                        onClick={refetch}
+                        disabled={isLoading}
+                    >
+                        Làm mới
+                    </Button>
+                    <Button
+                        variant="ghost"
+                        size="medium"
+                        icon={<IoDownload />}
+                        onClick={handleExportExcel}
+                        disabled={isLoading || records.length === 0}
+                    >
+                        Xuất Excel
+                    </Button>
                 </div>
             </div>
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { IoSearch, IoAdd } from "react-icons/io5";
+import { IoSearch, IoAdd, IoRefresh, IoDownload } from "react-icons/io5";
 import { Button } from "../common/Button";
 import type { FilterConfig } from "./types";
 
@@ -8,13 +8,21 @@ export interface NhapKhoFiltersProps {
     onSearchChange: (searchTerm: string) => void;
     onStatusFilterChange: (status: "all" | "active" | "inactive") => void;
     onCreateNew: () => void;
+    onRefresh: () => void;
+    onExport: () => void;
+    isLoading?: boolean;
+    hasRecords?: boolean;
 }
 
 export const NhapKhoFilters: React.FC<NhapKhoFiltersProps> = ({
     filters,
     onSearchChange,
     onStatusFilterChange,
-    onCreateNew
+    onCreateNew,
+    onRefresh,
+    onExport,
+    isLoading = false,
+    hasRecords = true
 }) => {
     const [localSearch, setLocalSearch] = useState(filters.searchTerm);
 
@@ -60,6 +68,30 @@ export const NhapKhoFilters: React.FC<NhapKhoFiltersProps> = ({
                     <option value="active">Đang hoạt động</option>
                     <option value="inactive">Không hoạt động</option>
                 </select>
+
+                <div className="wecare-tooltip">
+                    <Button
+                        variant="ghost"
+                        size="medium"
+                        icon={<IoRefresh />}
+                        onClick={onRefresh}
+                        disabled={isLoading}
+                        aria-label="Làm mới"
+                    />
+                    <span className="wecare-tooltip__bubble">Làm mới</span>
+                </div>
+
+                <div className="wecare-tooltip">
+                    <Button
+                        variant="ghost"
+                        size="medium"
+                        icon={<IoDownload />}
+                        onClick={onExport}
+                        disabled={isLoading || !hasRecords}
+                        aria-label="Xuất Excel"
+                    />
+                    <span className="wecare-tooltip__bubble">Xuất Excel</span>
+                </div>
 
                 <Button variant="primary" size="medium" icon={<IoAdd />} onClick={onCreateNew}>
                     Tạo mới

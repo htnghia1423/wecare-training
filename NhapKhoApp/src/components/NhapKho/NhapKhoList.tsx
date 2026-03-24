@@ -15,8 +15,9 @@ import { ErrorMessage } from "../common/ErrorMessage";
 import { EmptyState } from "../common/EmptyState";
 import { ToastContainer } from "../common/ToastContainer";
 import { useToast } from "../../hooks/useToast";
+import { useCurrentUser } from "../../hooks/useCurrentUser";
 import type { FormMode, NhapKhoTableRow, NhapKhoFormData, SortField } from "./types";
-import { IoAdd, IoSearch, IoFolderOpen, IoRefresh, IoDownload } from "react-icons/io5";
+import { IoAdd, IoSearch, IoFolderOpen } from "react-icons/io5";
 import { Button } from "../common/Button";
 
 export const NhapKhoList: React.FC = () => {
@@ -65,6 +66,7 @@ export const NhapKhoList: React.FC = () => {
     );
 
     const { toasts, showToast, dismissToast } = useToast();
+    const currentUser = useCurrentUser();
 
     const handleCreateNew = () => {
         setFormMode("create");
@@ -228,24 +230,19 @@ export const NhapKhoList: React.FC = () => {
                     </div>
                 </div>
                 <div className="wecare-header__actions">
-                    <Button
-                        variant="ghost"
-                        size="medium"
-                        icon={<IoRefresh />}
-                        onClick={refetch}
-                        disabled={isLoading}
-                    >
-                        Làm mới
-                    </Button>
-                    <Button
-                        variant="ghost"
-                        size="medium"
-                        icon={<IoDownload />}
-                        onClick={handleExportExcel}
-                        disabled={isLoading || records.length === 0}
-                    >
-                        Xuất Excel
-                    </Button>
+                    {currentUser && (
+                        <div className="wecare-user-info">
+                            <div className="wecare-user-info__avatar" aria-hidden="true">
+                                {currentUser.initials}
+                            </div>
+                            <div className="wecare-user-info__text">
+                                <span className="wecare-user-info__name">
+                                    {currentUser.fullName}
+                                </span>
+                                <span className="wecare-user-info__email">{currentUser.email}</span>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
 
@@ -254,6 +251,10 @@ export const NhapKhoList: React.FC = () => {
                 onSearchChange={setSearchTerm}
                 onStatusFilterChange={setStatusFilter}
                 onCreateNew={handleCreateNew}
+                onRefresh={refetch}
+                onExport={handleExportExcel}
+                isLoading={isLoading}
+                hasRecords={records.length > 0}
             />
 
             {isBlankSlate ? (

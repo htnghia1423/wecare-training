@@ -588,6 +588,14 @@
   font-size: 16px;
 }
 
+.wecare-button--icon-only {
+  padding: 0;
+  width: 36px;
+  height: 36px;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
 /* aliases for filters and inputs used in components */
 .wecare-filters {
   display: flex;
@@ -665,6 +673,59 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
+}
+
+/* ─── User info widget ───────────────────────────────────────────────────── */
+.wecare-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 12px 6px 6px;
+  border: 1px solid var(--border-light-grey);
+  border-radius: 999px;
+  background: #fff;
+  margin-right: 4px;
+}
+
+.wecare-user-info__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--wecare-blue);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: 0.5px;
+}
+
+.wecare-user-info__text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.wecare-user-info__name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-charcoal);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
+}
+
+.wecare-user-info__email {
+  font-size: 11px;
+  color: var(--text-medium-grey);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
 }
 
 .wecare-header__logo {

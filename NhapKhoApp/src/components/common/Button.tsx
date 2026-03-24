@@ -8,7 +8,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
     size?: ButtonSize;
     isLoading?: boolean;
     icon?: React.ReactNode;
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -26,7 +26,9 @@ export const Button: React.FC<ButtonProps> = ({
     const sizeClass = `wecare-button--${size}`;
     const loadingClass = isLoading ? "wecare-button--loading" : "";
 
-    const classes = [baseClass, variantClass, sizeClass, loadingClass, className]
+    const iconOnlyClass = icon && !children ? "wecare-button--icon-only" : "";
+
+    const classes = [baseClass, variantClass, sizeClass, loadingClass, iconOnlyClass, className]
         .filter(Boolean)
         .join(" ");
 
@@ -42,7 +44,7 @@ export const Button: React.FC<ButtonProps> = ({
                     {icon}
                 </span>
             )}
-            <span className="wecare-button__text">{children}</span>
+            {children && <span className="wecare-button__text">{children}</span>}
         </button>
     );
 };
